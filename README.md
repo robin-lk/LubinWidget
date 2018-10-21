@@ -1,9 +1,12 @@
 # LubinWidget
 
-    几个Android开发小控件，便于快速开发，后续更新中
-    整合其它控件库
+    几个Android开发小控件，便于快速开发，后续更新中(整合于其它控件库)。
     
+    
+* InputBoxLayout
 [![](img/InputBox.gif)](https://github.com/JC0127/InputBoxLayout/blob/master/README.md)
+
+* LubinBottomTabBar
 [![](img/Tabbar.gif)](https://github.com/JC0127/BottomTabBar/blob/master/README.md)
 
 * [![](https://jitpack.io/v/JC0127/LubinWidget.svg)](https://jitpack.io/#JC0127/LubinWidget)
@@ -50,6 +53,6 @@ xml 使用路径有所更改
 ```
 
 ### 详细使用请参考
-* ![InputBoxLayout](https://github.com/JC0127/InputBoxLayout/blob/master/README.md)
-* ![LubinBottomTabBar](https://github.com/JC0127/BottomTabBar/blob/master/README.md)
+* InputBoxLayout(https://github.com/JC0127/InputBoxLayout/blob/master/README.md)
+* LubinBottomTabBar(https://github.com/JC0127/BottomTabBar/blob/master/README.md)
  
