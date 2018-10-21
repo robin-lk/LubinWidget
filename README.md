@@ -4,9 +4,11 @@
     
     
 * InputBoxLayout
+
 [![](img/InputBox.gif)](https://github.com/JC0127/InputBoxLayout/blob/master/README.md)
 
 * LubinBottomTabBar
+
 [![](img/Tabbar.gif)](https://github.com/JC0127/BottomTabBar/blob/master/README.md)
 
 * [![](https://jitpack.io/v/JC0127/LubinWidget.svg)](https://jitpack.io/#JC0127/LubinWidget)
