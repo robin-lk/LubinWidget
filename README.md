@@ -53,6 +53,6 @@ xml 使用路径有所更改
 ```
 
 ### 详细使用请参考
-* InputBoxLayout(https://github.com/JC0127/InputBoxLayout/blob/master/README.md)
-* LubinBottomTabBar(https://github.com/JC0127/BottomTabBar/blob/master/README.md)
+* [InputBoxLayout](https://github.com/JC0127/InputBoxLayout/blob/master/README.md)
+* [LubinBottomTabBar](https://github.com/JC0127/BottomTabBar/blob/master/README.md)
  
