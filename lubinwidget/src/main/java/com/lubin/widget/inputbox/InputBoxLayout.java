@@ -7,7 +7,6 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -76,7 +75,7 @@ public class InputBoxLayout extends LinearLayout implements TextWatcher, View.On
         }
         boxMarginRight = (int) typedArray.getDimension(R.styleable.InputBoxLayout_box_marginRight, boxMarginRight);
         boxMarginLeft = (int) typedArray.getDimension(R.styleable.InputBoxLayout_box_marginLeft, boxMarginLeft);
-        boxTextColor = typedArray.getColor(R.styleable.InputBoxLayout_box_textCoclor, getResources().getColor(R.color.defaulet_color));
+        boxTextColor = typedArray.getColor(R.styleable.InputBoxLayout_box_textCoclor, getResources().getColor(R.color.default_color));
         initEditText();
         typedArray.recycle();
     }
@@ -163,7 +162,6 @@ public class InputBoxLayout extends LinearLayout implements TextWatcher, View.On
             setFocus();
         }
         textChanged();
-        Log.e(TAG, boxTextSize + " " + boxWidth);
     }
 
     /**
