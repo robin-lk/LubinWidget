@@ -19,6 +19,7 @@ public class TabItemLayout extends LinearLayout {
     private TextView mTxt;
     private TabItem mItem;
     private int position;
+    private LinearLayout.LayoutParams iconParams;
 
     public TabItemLayout(Context context) {
         super(context);
@@ -45,10 +46,20 @@ public class TabItemLayout extends LinearLayout {
 
     public void initData(TabItem item) {
         this.mItem = item;
-        mIcon.setImageResource(item.getIcItem());
+        if (item.getIcItem() == 0) {
+            mIcon.setVisibility(GONE);
+        } else {
+            mIcon.setVisibility(VISIBLE);
+            if (iconParams != null) {
+                mIcon.setLayoutParams(iconParams);
+            }
+            mIcon.setImageResource(item.getIcItem());
+
+        }
         if (!getResources().getString(item.getTxtItem()).equals(getResources().getString(R.string.txt_null))) {
             mTxt.setText(item.getTxtItem());
             mTxt.setTextSize(item.getTxtSize());
+            mTxt.setVisibility(VISIBLE);
             reTextColor();
         } else {
             mTxt.setVisibility(GONE);
@@ -75,5 +86,9 @@ public class TabItemLayout extends LinearLayout {
 
     public ImageView getmIcon() {
         return mIcon;
+    }
+
+    public void setIconParams(LayoutParams iconParams) {
+        this.iconParams = iconParams;
     }
 }

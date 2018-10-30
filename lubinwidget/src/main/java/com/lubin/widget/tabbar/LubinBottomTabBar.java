@@ -1,10 +1,14 @@
 package com.lubin.widget.tabbar;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import com.lubin.widget.R;
 
 import java.util.List;
 
@@ -22,25 +26,35 @@ public class LubinBottomTabBar extends LinearLayout implements View.OnClickListe
     private OnTabBarListener listener;
     private int tabCount;
     private View oldSelectView;
-
+    private int tarbarHeight = -1;
+    private int tarbarWidth = -1;
+    private LinearLayout.LayoutParams iconParams;
 
     public LubinBottomTabBar(Context context) {
         super(context);
-        initBottomTabbar();
     }
 
     public LubinBottomTabBar(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initBottomTabbar();
+        initBottomTabbar(context, attrs);
     }
 
     public LubinBottomTabBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initBottomTabbar();
+        initBottomTabbar(context, attrs);
     }
 
-    void initBottomTabbar() {
+    void initBottomTabbar(Context context, AttributeSet attrs) {
         setOrientation(HORIZONTAL);
+
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LubinBottomTabBar);
+        tarbarHeight = (int) typedArray.getDimension(R.styleable.LubinBottomTabBar_icon_height, -1);
+        tarbarWidth = (int) typedArray.getDimension(R.styleable.LubinBottomTabBar_icon_width, -1);
+        typedArray.recycle();
+        iconParams = new LayoutParams(context,attrs);
+        iconParams.gravity = Gravity.CENTER;
+        iconParams.height = tarbarHeight;
+        iconParams.weight = tarbarWidth;
     }
 
     /**
@@ -94,6 +108,9 @@ public class LubinBottomTabBar extends LinearLayout implements View.OnClickListe
             TabItemLayout layout;
             for (int i = 0; i < tabCount; i++) {
                 layout = new TabItemLayout(getContext());
+                if (tarbarHeight != -1 && tarbarWidth != -1) {
+                    layout.setIconParams(iconParams);
+                }
                 layout.initData(tabList.get(i));
                 layout.setTag(tabList.get(i));
                 layout.setPosition(i);
@@ -108,12 +125,12 @@ public class LubinBottomTabBar extends LinearLayout implements View.OnClickListe
     public void onClick(View v) {
         if (v instanceof TabItemLayout) {
             if (listener != null) {
-                listener.onTabClick(((TabItemLayout) v).getPosition(), (TabItem) v.getTag(),((TabItemLayout) v).getmIcon());
+                listener.onTabClick(((TabItemLayout) v).getPosition(), (TabItem) v.getTag(), ((TabItemLayout) v).getmIcon());
                 setCurrentItem(((TabItemLayout) v).getPosition());
             }
         } else {
             if (listener != null) {
-                listener.onTabClick(-1, (TabItem) v.getTag(),((TabItemLayout) v).getmIcon());
+                listener.onTabClick(-1, (TabItem) v.getTag(), ((TabItemLayout) v).getmIcon());
                 setCurrentItem(0);
             }
 

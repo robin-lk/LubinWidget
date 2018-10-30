@@ -17,6 +17,19 @@ public class TabItem {
      * 加载数据
      *
      * @param txtItem 文本资源id
+     * @param extra   额外信息
+     */
+    public TabItem(@StringRes int txtItem, String extra) {
+        this.txtItem = txtItem;
+        this.extra = extra;
+        this.txtSize = 12;
+        this.txtColor = new int[]{R.color.defaultColor, R.color.defaultColor};
+    }
+
+    /**
+     * 加载数据
+     *
+     * @param txtItem 文本资源id
      * @param icItem  图片资源id
      * @param extra   额外信息
      */
