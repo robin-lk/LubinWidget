@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.lubin.widget.R;
 import com.lubin.widget.dialog.data.CityData;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author lubin 2018/10/25
@@ -44,14 +47,23 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
      * 选中数据
      */
     private String nameProvince;
-    private int codeProvince;
+    private String codeProvince;
     private String nameCity;
-    private int codeCity;
+    private String codeCity;
     private String nameCounty;
-    private int codeCounty;
+    private String codeCounty;
     private String nameSubdistrictOffice;
-    private int codeSubdistrictOffice;
+    private String codeSubdistrictOffice;
 
+    private List<CityData.DateBean> provinceList;
+    private List<CityData.DateBean> cityList;
+    private List<CityData.DateBean> countyList;
+    private List<CityData.DateBean> subdistrictOfficeList;
+
+    private MultilevelListAdapter provinceAdapter;
+    private MultilevelListAdapter cityAdapter;
+    private MultilevelListAdapter countyAdapter;
+    private MultilevelListAdapter subdistrictOfficeAdapter;
     /**
      * 默认
      */
@@ -114,45 +126,116 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
         if (id == R.id.im_multilevel_close) {
             dismiss();
         } else if (id == R.id.txt_multilevel_province) {
-
+            if (provinceAdapter != null) {
+                listView.setAdapter(provinceAdapter);
+            }
         } else if (id == R.id.txt_multilevel_city) {
-
+            if (cityAdapter != null) {
+                listView.setAdapter(cityAdapter);
+            }
         } else if (id == R.id.txt_multilevel_counties) {
-
+            if (countyAdapter != null) {
+                listView.setAdapter(countyAdapter);
+            }
         } else if (id == R.id.txt_multilevel_subdistrict_office) {
-
+            if (subdistrictOfficeAdapter != null) {
+                listView.setAdapter(subdistrictOfficeAdapter);
+            }
         }
     }
 
-
-    public void loadData(List<CityData.DateBean> beanList, int cityType) {
+    /**
+     * 添加数据
+     *
+     * @param beanList beanList
+     * @param cityType cityType
+     */
+    public MultiLevelBottomDialog loadData(List<CityData.DateBean> beanList, int cityType) {
         switch (cityType) {
             case TYPE_PROVINCE:
+                provinceList = beanList;
+                if (provinceAdapter == null) {
+                    provinceAdapter = new MultilevelListAdapter(provinceList, new OnListItemClick() {
+                        @Override
+                        public void onCitySelected(CityData.DateBean cityBean, int position) {
+                            nameProvince = cityBean.getName();
+                            codeProvince = cityBean.getCode();
+                            tvProvince.setText(nameProvince);
+                            nameCity = null;
+                            nameCounty = null;
+                            nameSubdistrictOffice = null;
+                            codeCity = null;
+                            codeCounty = null;
+                            codeSubdistrictOffice = null;
+                        }
+                    });
+                }
 
                 break;
             case TYPE_CITY:
-
+                cityList = beanList;
+                if (cityAdapter == null) {
+                    cityAdapter = new MultilevelListAdapter(cityList, new OnListItemClick() {
+                        @Override
+                        public void onCitySelected(CityData.DateBean cityBean, int position) {
+                            nameCity = cityBean.getName();
+                            codeCity = cityBean.getCode();
+                            nameCounty = null;
+                            nameSubdistrictOffice = null;
+                            codeCounty = null;
+                            codeSubdistrictOffice = null;
+                        }
+                    });
+                }
                 break;
             case TYPE_COUNTY:
-
+                countyList = beanList;
+                if (countyAdapter == null) {
+                    countyAdapter = new MultilevelListAdapter(countyList, new OnListItemClick() {
+                        @Override
+                        public void onCitySelected(CityData.DateBean cityBean, int position) {
+                            nameCounty = cityBean.getName();
+                            codeCounty = cityBean.getCode();
+                            nameSubdistrictOffice = null;
+                            codeSubdistrictOffice = null;
+                        }
+                    });
+                }
                 break;
             case TYPE_SUBDISTRICTOFFICE:
-
+                subdistrictOfficeList = beanList;
+                if (subdistrictOfficeAdapter == null) {
+                    subdistrictOfficeAdapter = new MultilevelListAdapter(subdistrictOfficeList, new OnListItemClick() {
+                        @Override
+                        public void onCitySelected(CityData.DateBean cityBean, int position) {
+                            nameSubdistrictOffice = cityBean.getName();
+                            codeSubdistrictOffice = cityBean.getCode();
+                        }
+                    });
+                }
                 break;
             default:
                 break;
         }
+        return this;
     }
 
     class MultilevelListAdapter extends BaseAdapter {
 
         private List<CityData.DateBean> cityBean;
         private OnListItemClick onListItemClick;
-        private int selseCode;
+        private String selseCode;
 
-        public MultilevelListAdapter(List<CityData.DateBean> cityBean, OnListItemClick onListItemClick) {
+        public MultilevelListAdapter() {
+        }
+
+        MultilevelListAdapter(List<CityData.DateBean> cityBean, OnListItemClick onListItemClick) {
             this.cityBean = cityBean;
             this.onListItemClick = onListItemClick;
+        }
+
+        public void setDefaultData(String cityName, String cityCode, int cityType) {
+            this.selseCode = cityCode;
         }
 
         @Override
@@ -180,17 +263,22 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
             } else {
                 hodler = (ViewListHodler) convertView.getTag();
             }
-            if (selseCode != 0) {
-                if (cityBean.get(position).getCode().equals(selseCode + "")) {
-
-                }
+            if (!TextUtils.isEmpty(selseCode) && cityBean.get(position).getCode().equals(selseCode)) {
+                hodler.tvCityName.setText(cityBean.get(position).getName());
+                hodler.tvCityName.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_city_color));
+                hodler.imIsChecked.setSelected(true);
+            } else {
+                hodler.tvCityName.setText(cityBean.get(position).getName());
+                hodler.tvCityName.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_city_color_red));
+                hodler.imIsChecked.setSelected(false);
             }
             hodler.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (onListItemClick != null) {
-                        onListItemClick.onCitySelected(cityBean.get(position));
-
+                        onListItemClick.onCitySelected(cityBean.get(position), position);
+                        selseCode = cityBean.get(position).getCode();
+                        notifyData();
                     }
                 }
             });
@@ -210,6 +298,12 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
             }
         }
 
+        /**
+         * 刷新
+         */
+        private void notifyData() {
+            notifyDataSetChanged();
+        }
     }
 
     public interface OnListItemClick {
@@ -217,8 +311,10 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
          * 选中的city
          *
          * @param cityBean cityBean
+         * @param position 位置
          */
-        void onCitySelected(CityData.DateBean cityBean);
+        void onCitySelected(CityData.DateBean cityBean, int position);
     }
+
 
 }
