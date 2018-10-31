@@ -3,6 +3,7 @@ package com.lubin.widget.tabbar;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,8 @@ public class LubinBottomTabBar extends LinearLayout implements View.OnClickListe
         iconParams = new LayoutParams(context,attrs);
         iconParams.gravity = Gravity.CENTER;
         iconParams.height = tarbarHeight;
-        iconParams.weight = tarbarWidth;
+        iconParams.width = tarbarWidth;
+        Log.e("TAG",tarbarHeight+"");
     }
 
     /**
@@ -109,7 +111,7 @@ public class LubinBottomTabBar extends LinearLayout implements View.OnClickListe
             for (int i = 0; i < tabCount; i++) {
                 layout = new TabItemLayout(getContext());
                 if (tarbarHeight != -1 && tarbarWidth != -1) {
-                    layout.setIconParams(iconParams);
+                    layout.setIconParams(tarbarWidth,tarbarHeight);
                 }
                 layout.initData(tabList.get(i));
                 layout.setTag(tabList.get(i));

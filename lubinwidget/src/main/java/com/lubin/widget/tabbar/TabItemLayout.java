@@ -1,6 +1,7 @@
 package com.lubin.widget.tabbar;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,7 +20,9 @@ public class TabItemLayout extends LinearLayout {
     private TextView mTxt;
     private TabItem mItem;
     private int position;
-    private LinearLayout.LayoutParams iconParams;
+    private int tarbarWidth;
+    private int tarbarHeight;
+    private LinearLayout.LayoutParams params;
 
     public TabItemLayout(Context context) {
         super(context);
@@ -42,6 +45,8 @@ public class TabItemLayout extends LinearLayout {
         LayoutInflater.from(context).inflate(R.layout.tabbar_item_layout, this, true);
         mIcon = findViewById(R.id.tat_icon);
         mTxt = findViewById(R.id.tab_txt);
+
+
     }
 
     public void initData(TabItem item) {
@@ -50,10 +55,15 @@ public class TabItemLayout extends LinearLayout {
             mIcon.setVisibility(GONE);
         } else {
             mIcon.setVisibility(VISIBLE);
-            if (iconParams != null) {
-                mIcon.setLayoutParams(iconParams);
+            if (tarbarWidth > 0 && tarbarHeight > 0) {
+                params = (LayoutParams) mIcon.getLayoutParams();
+                params.height = tarbarHeight;
+                params.width = tarbarWidth;
+                params.gravity = Gravity.CENTER;
+                mIcon.setLayoutParams(params);
             }
             mIcon.setImageResource(item.getIcItem());
+            mIcon.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         }
         if (!getResources().getString(item.getTxtItem()).equals(getResources().getString(R.string.txt_null))) {
@@ -69,10 +79,10 @@ public class TabItemLayout extends LinearLayout {
     public void reTextColor() {
 
         if (this.isSelected()) {
-            mTxt.setTextColor(getResources().getColor(mItem.getTxtColor()[0]));
+            mTxt.setTextColor(ContextCompat.getColor(getContext(), mItem.getTxtColor()[0]));
         } else {
             if (mItem.getTxtColor().length > 1)
-                mTxt.setTextColor(getResources().getColor(mItem.getTxtColor()[1]));
+                mTxt.setTextColor(ContextCompat.getColor(getContext(), mItem.getTxtColor()[1]));
         }
     }
 
@@ -88,7 +98,8 @@ public class TabItemLayout extends LinearLayout {
         return mIcon;
     }
 
-    public void setIconParams(LayoutParams iconParams) {
-        this.iconParams = iconParams;
+    public void setIconParams(int tarbarWidth, int tarbarHeight) {
+        this.tarbarHeight = tarbarHeight;
+        this.tarbarWidth = tarbarWidth;
     }
 }

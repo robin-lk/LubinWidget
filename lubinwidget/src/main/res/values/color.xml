@@ -2,4 +2,9 @@
 <resources>
     <color name="defaultColor">#161616</color>
     <color name="default_color">#999999</color>
+    <color name="multilevel_title_color">#848689</color>
+    <color name="multilevel_city_color">#232326</color>
+    <color name="multilevel_city_color_red">#F23030</color>
+    <color name="multilevel_line">#E3E5E9</color>
+    <color name="white">#FFFFFFFF</color>
 </resources>

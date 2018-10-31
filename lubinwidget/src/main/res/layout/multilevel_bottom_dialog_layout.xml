@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp">
+
+        <TextView
+            android:id="@+id/txt_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/multilevel_title_default"
+            android:textColor="@color/multilevel_title_color"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/im_multilevel_close"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center|end"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="@string/app_name"
+            android:padding="2dp"
+            android:src="@drawable/ic_close_24dp"
+            android:tint="@color/multilevel_title_color" />
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/multilevel_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_multilevel_province"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/multilevel_title_color"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_multilevel_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/multilevel_title_color"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_multilevel_counties"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/multilevel_title_color"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_multilevel_subdistrict_office"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/multilevel_title_color"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/multilevel_line" />
+
+    <FrameLayout
+        android:id="@+id/multilevel_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ListView
+            android:id="@+id/multilevel_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/default_color"
+            tools:ignore="UnusedAttribute" />
+    </FrameLayout>
+
+</LinearLayout>
