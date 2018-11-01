@@ -13,6 +13,13 @@
 
 * [![](https://jitpack.io/v/JC0127/LubinWidget.svg)](https://jitpack.io/#JC0127/LubinWidget)
  ![](https://img.shields.io/badge/author-Lubin-red.svg)
+ 
+* MultiLevelBottomDialog(0.6.0版新增加)
+  
+  
+*[![](img/MultilevelDialog.gif)]
+
+
 
 ### 使用 
 ```markdown
@@ -24,7 +31,7 @@
 	}
 	
 	dependencies {
-    	        implementation 'com.github.JC0127:LubinWidget:0.5.2'
+    	        implementation 'com.github.JC0127:LubinWidget:0.6.0'
     	}
 ```
 
@@ -52,6 +59,37 @@ xml 使用路径有所更改
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true" />
+```
+#### MultiLevelBottomDialog
+
+MultiLevelBottomDialog一个类型京东app地址选择的框架，城市数据自己提供。
+```java
+ //初始化
+ multiLevelBottomDialog = MultiLevelBottomDialog.newInstance().initDialogHeight("int 高度");
+ //加载数据
+ multiLevelBottomDialog.loadData(beans, MultiLevelBottomDialog.TYPE_PROVINCE);
+ //设置监听回调
+ multiLevelBottomDialog.setListener();
+ 
+     /**
+      * 选中的项
+      *
+      * @param cityName     选中的name
+      * @param cityCode     选中的code
+      * @param nextCityType 所需的下一个级别
+      */
+     void onSelectedCallBack(String cityName, String cityCode, int nextCityType);
+ 
+     /**
+      * 全部选中返回
+      *
+      * @param provinceName      省
+      * @param cityName          市
+      * @param countyName        县/区
+      * @param subdistrictOffice 街道
+      * @param cityCode          选中的code
+      */
+     void onFullSelectedCallBack(String provinceName, String cityName, String countyName, String subdistrictOffice, String cityCode);
 ```
 
 ### 详细使用请参考

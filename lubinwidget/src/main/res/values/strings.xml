@@ -2,4 +2,5 @@
     <string name="app_name">Control</string>
     <string name="txt_null">不需要文字——null txt</string>
     <string name="multilevel_title_default">配送至</string>
+    <string name="multilevel_title_please_choose">请选择</string>
 </resources>
