@@ -11,14 +11,15 @@
 
  [![](img/Tabbar.gif)](https://github.com/JC0127/BottomTabBar/blob/master/README.md)
 
-* [![](https://jitpack.io/v/JC0127/LubinWidget.svg)](https://jitpack.io/#JC0127/LubinWidget)
- ![](https://img.shields.io/badge/author-Lubin-red.svg)
+
  
 * MultiLevelBottomDialog(0.6.0版新增加)
   
-  
-*![](img/MultilevelDialog.gif)
+![](img/MultilevelDialog.gif)
 
+
+* [![](https://jitpack.io/v/JC0127/LubinWidget.svg)](https://jitpack.io/#JC0127/LubinWidget)
+ ![](https://img.shields.io/badge/author-Lubin-red.svg)
 
 
 ### 使用 
