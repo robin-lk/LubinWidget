@@ -21,7 +21,6 @@ public class TabItem {
      */
     public TabItem(@StringRes int txtItem,@ColorRes int[] txtColor, int txtSize) {
         this.txtItem = txtItem;
-        this.extra = extra;
         this.txtSize = txtSize;
         this.txtColor = new int[]{R.color.defaultColor, R.color.defaultColor};
     }
