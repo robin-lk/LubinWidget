@@ -17,12 +17,12 @@ public class TabItem {
      * 加载数据
      *
      * @param txtItem 文本资源id
-     * @param extra   额外信息
+     * @param txtSize   txtSize
      */
-    public TabItem(@StringRes int txtItem,@ColorRes int[] txtColor, String extra) {
+    public TabItem(@StringRes int txtItem,@ColorRes int[] txtColor, int txtSize) {
         this.txtItem = txtItem;
         this.extra = extra;
-        this.txtSize = 12;
+        this.txtSize = txtSize;
         this.txtColor = new int[]{R.color.defaultColor, R.color.defaultColor};
     }
 
