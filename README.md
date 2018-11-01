@@ -32,7 +32,7 @@
 	}
 	
 	dependencies {
-    	        implementation 'com.github.JC0127:LubinWidget:0.6.0'
+    	        implementation 'com.github.JC0127:LubinWidget:0.6.2'
     	}
 ```
 
