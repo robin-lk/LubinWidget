@@ -25,7 +25,7 @@ public class TabbarActivity extends AppCompatActivity implements OnTabBarListene
         list = new ArrayList<>();
         list.add(new TabItem(R.string.first, R.drawable.ic_01, 14, ""));
         list.add(new TabItem(R.string.txt_null, R.drawable.ic_launcher_background, 14, ""));
-        list.add(new TabItem(R.string.second,""));
+        list.add(new TabItem(R.string.second,new int[]{R.color.colorAccent, R.color.colorPrimary},12));
         list.add(new TabItem(R.string.us, R.drawable.ic_01, new int[]{R.color.colorAccent, R.color.colorPrimary}, ""));
         tabBar.initData(list, this);
     }

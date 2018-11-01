@@ -38,10 +38,11 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
     /**
      * 省，市，县区/乡镇，街道
      */
-    private TextView tvProvince, tvCity, tvCounties, tvSubdistrictOffice;
+    private TextView tvProvince, tvCity, tvCounties, tvSubdistrictOffice, tvTitleTop;
     private ListView listView;
     private ProgressBar progressBar;
     private int multilevelHeight = 0;
+    private String titleMultiLevel;
 
     public static final int TYPE_PROVINCE = 1;
     public static final int TYPE_CITY = 2;
@@ -116,12 +117,16 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
         tvCity = root.findViewById(R.id.txt_multilevel_city);
         tvCounties = root.findViewById(R.id.txt_multilevel_counties);
         tvSubdistrictOffice = root.findViewById(R.id.txt_multilevel_subdistrict_office);
+        tvTitleTop = root.findViewById(R.id.txt_dialog_title);
         progressBar = root.findViewById(R.id.multilevel_progress_bar);
         imClose.setOnClickListener(this);
         tvProvince.setOnClickListener(this);
         tvCity.setOnClickListener(this);
         tvCounties.setOnClickListener(this);
         tvSubdistrictOffice.setOnClickListener(this);
+        if (!TextUtils.isEmpty(titleMultiLevel)) {
+            tvTitleTop.setText(titleMultiLevel);
+        }
     }
 
     @Override
@@ -223,8 +228,19 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
         return this;
     }
 
+    /**
+     * 设置高度
+     *
+     * @param dialogHeight int 高
+     * @return MultiLevelBottomDialog
+     */
     public MultiLevelBottomDialog initDialogHeight(int dialogHeight) {
         this.multilevelHeight = dialogHeight;
+        return this;
+    }
+
+    public MultiLevelBottomDialog initTopTitle(String titleMultiLevel) {
+        this.titleMultiLevel = titleMultiLevel;
         return this;
     }
 

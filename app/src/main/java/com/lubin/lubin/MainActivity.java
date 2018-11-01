@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 .baseUrl("http://gaosq.top:8080/")
                 .build();
         iMultilevel = retrofit.create(IMultilevel.class);
-        multiLevelBottomDialog = MultiLevelBottomDialog.newInstance().initDialogHeight(1200);
+        multiLevelBottomDialog = MultiLevelBottomDialog.newInstance().initDialogHeight(1200).initTopTitle("Add address");
         multiLevelBottomDialog.setListener(new OnMultilevelCallBack() {
             @Override
             public void onSelectedCallBack(String cityName, String cityCode, int nextCityType) {
