@@ -17,7 +17,7 @@
 * MultiLevelBottomDialog(0.6.0版新增加)
   
   
-*[![](img/MultilevelDialog.gif)]
+*![](img/MultilevelDialog.gif)
 
 
 
