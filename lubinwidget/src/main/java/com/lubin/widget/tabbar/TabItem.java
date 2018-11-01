@@ -19,7 +19,7 @@ public class TabItem {
      * @param txtItem 文本资源id
      * @param extra   额外信息
      */
-    public TabItem(@StringRes int txtItem, String extra) {
+    public TabItem(@StringRes int txtItem,@ColorRes int[] txtColor, String extra) {
         this.txtItem = txtItem;
         this.extra = extra;
         this.txtSize = 12;
