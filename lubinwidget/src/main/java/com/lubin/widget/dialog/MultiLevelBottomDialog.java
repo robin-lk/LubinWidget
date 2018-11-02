@@ -1,10 +1,14 @@
 package com.lubin.widget.dialog;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -34,7 +38,10 @@ import java.util.Objects;
  * Multi domain selection, similar to Jingdong APP address selector
  */
 public class MultiLevelBottomDialog extends DialogFragment implements View.OnClickListener {
-    private ImageView imClose;
+
+    private View indicator;
+    private View multiLevelLayout;
+
     /**
      * 省，市，县区/乡镇，街道
      */
@@ -111,7 +118,8 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
     }
 
     private void initView(View root) {
-        imClose = root.findViewById(R.id.im_multilevel_close);
+        multiLevelLayout = root.findViewById(R.id.multiLevel_layout);
+        ImageView imClose = root.findViewById(R.id.im_multilevel_close);
         listView = root.findViewById(R.id.multilevel_list_view);
         tvProvince = root.findViewById(R.id.txt_multilevel_province);
         tvCity = root.findViewById(R.id.txt_multilevel_city);
@@ -119,6 +127,7 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
         tvSubdistrictOffice = root.findViewById(R.id.txt_multilevel_subdistrict_office);
         tvTitleTop = root.findViewById(R.id.txt_dialog_title);
         progressBar = root.findViewById(R.id.multilevel_progress_bar);
+        indicator = root.findViewById(R.id.multilevel_indicator);
         imClose.setOnClickListener(this);
         tvProvince.setOnClickListener(this);
         tvCity.setOnClickListener(this);
@@ -143,6 +152,7 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
             tvCity.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_title_color));
             tvCounties.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_title_color));
             tvSubdistrictOffice.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_title_color));
+            indicatorAnimator(tvProvince).start();
         } else if (id == R.id.txt_multilevel_city) {
             if (cityAdapter != null) {
                 listView.setAdapter(cityAdapter);
@@ -152,6 +162,7 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
             tvCounties.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_title_color));
             tvSubdistrictOffice.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_title_color));
             tvProvince.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_title_color));
+            indicatorAnimator(tvCity).start();
         } else if (id == R.id.txt_multilevel_counties) {
             if (countyAdapter != null) {
                 listView.setAdapter(countyAdapter);
@@ -161,6 +172,7 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
             tvSubdistrictOffice.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_title_color));
             tvProvince.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_title_color));
             tvCity.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_title_color));
+            indicatorAnimator(tvCounties).start();
         } else if (id == R.id.txt_multilevel_subdistrict_office) {
             if (subdistrictOfficeAdapter != null) {
                 listView.setAdapter(subdistrictOfficeAdapter);
@@ -170,6 +182,7 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
             tvProvince.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_title_color));
             tvCity.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_title_color));
             tvCounties.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_title_color));
+            indicatorAnimator(tvSubdistrictOffice).start();
         }
     }
 
@@ -198,12 +211,24 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
             case TYPE_PROVINCE:
                 initProvinec(beanList);
                 tvProvince.setText(R.string.multilevel_title_please_choose);
+                multiLevelLayout.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        indicatorAnimator(tvProvince).start();
+                    }
+                });
                 tvProvince.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_city_color_red));
                 showLoading(false);
                 break;
             case TYPE_CITY:
                 initCity(beanList);
                 tvCity.setText(R.string.multilevel_title_please_choose);
+                multiLevelLayout.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        indicatorAnimator(tvCity).start();
+                    }
+                });
                 tvCity.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_city_color_red));
                 tvProvince.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_title_color));
                 showLoading(false);
@@ -211,6 +236,12 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
             case TYPE_COUNTY:
                 initCounty(beanList);
                 tvCounties.setText(R.string.multilevel_title_please_choose);
+                multiLevelLayout.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        indicatorAnimator(tvCounties).start();
+                    }
+                });
                 tvCounties.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_city_color_red));
                 tvCity.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_title_color));
                 showLoading(false);
@@ -218,6 +249,12 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
             case TYPE_SUBDISTRICTOFFICE:
                 initsubdistrictOffice(beanList);
                 tvSubdistrictOffice.setText(R.string.multilevel_title_please_choose);
+                multiLevelLayout.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        indicatorAnimator(tvSubdistrictOffice).start();
+                    }
+                });
                 tvSubdistrictOffice.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_city_color_red));
                 tvCounties.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.multilevel_title_color));
                 showLoading(false);
@@ -463,6 +500,10 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
             return convertView;
         }
 
+        protected View dataView(){
+            return tvCity;
+        }
+
         class ViewListHodler {
             private TextView tvCityName;
             private ImageView imIsChecked;
@@ -482,6 +523,28 @@ public class MultiLevelBottomDialog extends DialogFragment implements View.OnCli
             notifyDataSetChanged();
         }
     }
+
+
+    private AnimatorSet indicatorAnimator(TextView tab) {
+        ObjectAnimator xAnimator = ObjectAnimator.ofFloat(indicator, "X", indicator.getX(), tab.getX());
+
+        final ViewGroup.LayoutParams params = indicator.getLayoutParams();
+        ValueAnimator widthAnimator = ValueAnimator.ofInt(params.width, tab.getMeasuredWidth());
+        widthAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                params.width = (int) animation.getAnimatedValue();
+                indicator.setLayoutParams(params);
+            }
+        });
+
+        AnimatorSet set = new AnimatorSet();
+        set.setInterpolator(new FastOutSlowInInterpolator());
+        set.playTogether(xAnimator, widthAnimator);
+
+        return set;
+    }
+
 
     public interface OnListItemClick {
         /**

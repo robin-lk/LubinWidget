@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:id="@+id/multiLevel_layout"
     android:orientation="vertical">
 
     <FrameLayout
@@ -79,10 +80,23 @@
 
     </LinearLayout>
 
-    <View
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/multilevel_line" />
+        android:layout_height="2dp">
+
+        <View
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/multilevel_line" />
+
+        <View
+            android:layout_marginStart="10dp"
+            android:id="@+id/multilevel_indicator"
+            android:layout_width="0dp"
+            android:layout_height="1.5dp"
+            android:background="@color/multilevel_city_color_red" />
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/multilevel_layout"
