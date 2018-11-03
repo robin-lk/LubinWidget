@@ -35,7 +35,7 @@
     	        implementation 'com.github.JC0127:LubinWidget:0.6.2'
     	}
 ```
-### 使用 
+### 或 
 
 * [ ![Download](https://api.bintray.com/packages/lubin/MavenLubin/LubinWidget/images/download.svg) ](https://bintray.com/lubin/MavenLubin/LubinWidget/_latestVersion)
 
