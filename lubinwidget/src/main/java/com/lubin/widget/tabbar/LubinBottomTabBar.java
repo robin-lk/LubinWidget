@@ -56,7 +56,7 @@ public class LubinBottomTabBar extends LinearLayout implements View.OnClickListe
         iconParams.gravity = Gravity.CENTER;
         iconParams.height = tarbarHeight;
         iconParams.width = tarbarWidth;
-        Log.e("TAG",tarbarHeight+"");
+//        Log.e("TAG",tarbarHeight+"");
     }
 
     /**

@@ -35,6 +35,13 @@
     	        implementation 'com.github.JC0127:LubinWidget:0.6.2'
     	}
 ```
+### 使用 
+
+* [ ![Download](https://api.bintray.com/packages/lubin/MavenLubin/LubinWidget/images/download.svg) ](https://bintray.com/lubin/MavenLubin/LubinWidget/_latestVersion)
+
+```markdown
+    compile 'com.lubin.widget:lubinwidget:0.6.0'
+```
 
 #### InputBoxLayout
 
