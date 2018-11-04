@@ -40,7 +40,11 @@
 * [ ![Download](https://api.bintray.com/packages/lubin/MavenLubin/LubinWidget/images/download.svg) ](https://bintray.com/lubin/MavenLubin/LubinWidget/_latestVersion)
 
 ```markdown
+    //如果使用的是support
     compile 'com.lubin.widget:lubinwidget:0.6.0'
+    
+    //如果你适配了androidx
+    compile 'com.lubin.widget:lubinwidget:0.6.1'
 ```
 
 #### InputBoxLayout
