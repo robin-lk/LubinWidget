@@ -12,6 +12,18 @@
         <attr name="box_marginRight" format="dimension" />
         <attr name="box_marginLeft" format="dimension" />
         <attr name="box_drawable" format="integer" />
-        <attr name="box_textCoclor" format="color"/>
+        <attr name="box_textCoclor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="HorizontalProgressBar">
+        <attr name="maxPercent" format="integer" />
+        <attr name="defaultPercent" format="integer" />
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="paddingStart" format="dimension" />
+        <attr name="paddingEnd" format="dimension" />
+        <attr name="padding" format="dimension" />
+        <attr name="progressBar_color" format="color" />
+        <attr name="progressBar_Background" format="color" />
+        <attr name="progressBar_height" format="dimension" />
     </declare-styleable>
 </resources>
