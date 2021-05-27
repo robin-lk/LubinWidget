@@ -32,7 +32,7 @@
 	}
 	
 	dependencies {
-    	        implementation 'com.github.JC0127:LubinWidget:0.6.2'
+    	        implementation 'com.github.robin-lk:LubinWidget:0.6.2'
     	}
 ```
 ### 或 
@@ -41,10 +41,10 @@
 
 ```markdown
     //如果使用的是support
-    compile 'com.lubin.widget:lubinwidget:0.6.0'
+    compile 'com.github.robin-lk:LubinWidget:0.6.0'
     
     //如果你适配了androidx
-    compile 'com.lubin.widget:lubinwidget:0.6.1'
+    compile 'com.github.robin-lk:LubinWidget:0.6.1'
 ```
 
 #### InputBoxLayout
